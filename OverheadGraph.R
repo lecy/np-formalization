@@ -1,6 +1,6 @@
-setwd( "C:/Users/jdlecy/Desktop/Overhead Graph" )
-
 library( foreign )
+
+# NCCS SOI and DIGITIZED DATA
 
 dat <- read.dta( "SOI_2008.dta" )
 
