@@ -4,10 +4,11 @@ Replication code + data for:
 
 -----
 
-> Searing, E. A., & Lecy, J. D. (2022). Growing Up Nonprofit: Predictors of Early-Stage Nonprofit Formalization. Nonprofit and Voluntary Sector Quarterly, 51(3), 680-698. [**PDF**](https://github.com/lecy/np-professionalization/raw/main/searing-lecy-growing-up-nonprofit.pdf)
+> Searing, E. A., & Lecy, J. D. (2022). Growing Up Nonprofit: Predictors of Early-Stage Nonprofit Formalization.*Nonprofit and Voluntary Sector Quarterly*, 51(3), 680-698. [**PDF**](https://github.com/lecy/np-professionalization/raw/main/searing-lecy-growing-up-nonprofit.pdf)
 
 -----
 
+All files available on [GITHUB](https://github.com/lecy/np-professionalization)
 
 [DATA](https://github.com/lecy/np-professionalization/tree/main/Data) 
 
