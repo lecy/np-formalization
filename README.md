@@ -1,6 +1,6 @@
-# np-professionalization
+# Growing Up Nonprofit: Predictors of Early-Stage Nonprofit Formalization
 
-Replication code + data for "Growing Up Nonprofit: Predictors of Early-Stage Nonprofit Formalization".
+Replication code + data for:
 
 -----
 
