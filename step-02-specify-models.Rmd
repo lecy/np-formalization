@@ -1,0 +1,385 @@
+---
+title: "Specification"
+author: "Jesse Lecy"
+output:
+  html_document:
+    theme: readable
+    df_print: paged
+    highlight: zenburn
+    toc: true
+    self_contained: false
+    number_sections: false
+    css: clean.css
+---
+
+
+
+
+
+
+
+# SETUP
+
+```{r, warning=FALSE, message=FALSE}
+
+library( foreign )
+library( memisc )
+library( knitr )
+library( dplyr )
+library( xtable )
+library( stargazer )
+library( broom )
+library( pander )
+
+
+
+```
+
+
+
+# LOAD DATA
+
+```{r, warning=FALSE }
+
+dat <- readRDS( "./Data/CompleteHazardSpells.rds" )
+
+# lapply( dat, class )
+#                   
+# head( dat, 25 ) %>% pander
+
+nrow( dat )
+
+```
+
+
+
+# MODEL WITH CONTINUOUS AGE
+
+
+
+## Continuous Duration
+
+```{r, fig.height=8}
+
+
+m.01.01 <- glm( formula= prof ~ AGE, data=dat,  family=binomial("logit") )
+m.01.02 <- glm( formula= prof ~ AGE + Age2, data=dat,  family=binomial("logit") )
+m.01.03 <- glm( formula= prof ~ AGE + Age2 + Age3, data=dat,  family=binomial("logit") )
+m.01.04 <- glm( formula= prof ~ AGE + Age2 + Age3 + Age4 + Age5, data=dat,  family=binomial("logit") )
+
+
+m.01.01 %>% tidy %>% kable( digits=3 )
+m.01.02 %>% tidy %>% kable( digits=3 )
+m.01.03 %>% tidy %>% kable( digits=3 )
+m.01.04 %>% tidy %>% kable( digits=3 )
+
+par( mfrow=c(2,2) )
+
+plot( dat$AGE , m.01.01$fitted.values, pch=19, cex=2, bty="n" )
+plot( dat$AGE , m.01.02$fitted.values, pch=19, cex=2, bty="n" )
+plot( dat$AGE , m.01.03$fitted.values, pch=19, cex=2, bty="n" )
+plot( dat$AGE , m.01.04$fitted.values, pch=19, cex=2, bty="n" )
+
+
+```
+
+
+
+
+
+
+# DISCRETE TIME MODEL
+
+
+
+## Discrete Duration
+
+```{r, warning=F }
+
+
+m.02 <- glm( formula= prof ~ D1 + D2 + D3 + D4 + D5 + D6 - 1, data=dat,   family=binomial("logit") )
+
+m.02 %>% tidy %>% kable( digits=3 )
+
+# stargazer( m.02, type = 'html')
+
+pd <- unique( data.frame( age=dat$age, hazard.rate=m.02$fitted.values ) )
+
+pd <- pd[ order(pd$age) , ]
+
+plot( pd$age, pd$hazard.rate, type="b", pch=19, col="gray20", cex=2, xlab="NP Age", ylab="Hazard Rate" )
+# points( (dat$AGE - 1) , m.01$fitted.values, pch=19, cex=2, col="red" )
+
+    
+
+
+
+m.03 <- glm( formula= prof ~ D1 + D2 + D3 + D4 + D5 + D6 + Accrual + GovtMoneyRat + HHI + 
+                             UNAgrand + FixedCostRat + SurplusRat_ndrop_w892 + EqRat_w_K + 
+                             ProfFundFeeYes - 1, 
+                             data=dat,   family=binomial("logit") )
+
+m.03 %>% tidy %>% kable( digits=3 )
+
+
+
+      
+```
+
+
+
+## Survival Curves
+
+This is the intercept only model, not accounting for any covariates (not very good model).
+
+```{r}
+
+# Control case - no professionalization
+
+h1 <- (    1 / ( 1 + exp(-( m.03$coeff[1] ))   )     )
+h2 <- (    1 / ( 1 + exp(-( m.03$coeff[2] ))   )     )
+h3 <- (    1 / ( 1 + exp(-( m.03$coeff[3] ))   )     )
+h4 <- (    1 / ( 1 + exp(-( m.03$coeff[4] ))   )     )
+h5 <- (    1 / ( 1 + exp(-( m.03$coeff[5] ))   )     )
+h6 <- (    1 / ( 1 + exp(-( m.03$coeff[6] ))   )     )
+
+hr <- data.frame( age=0:5, hazard.rate=c(h1,h2,h3,h4,h5,h6) ) 
+
+sr <- cumprod( (1-hr$hazard.rate))
+
+hr <- cbind( hr, survival.rate=sr )
+
+hr 
+
+par( mfrow=c(1,2) )
+
+plot( 0:5, hr$hazard.rate, type="b", pch=19, cex=1.2, ylim=c(0,0.5),
+      main="Hazard Rate", xlab="Nonprofit Age", ylab="Probability of Professionalizing at Age=j")
+
+plot( 0:5, sr, type="b", pch=19, cex=1.2, ylim=c(0,1.1),
+      main="Survival Curve", xlab="Nonprofit Age", ylab="Probability of Remaining Nonprofessional")
+abline( h=0.5, col="red", lty=3)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+## Centered Estimates
+
+Hold each 
+
+```{r}
+
+
+
+# m.03 <- glm( formula= prof ~ D1 + D2 + D3 + D4 + D5 + D6 + Accrual + GovtMoneyRat + HHI + UNAgrand + 
+#                              FixedCostRat + SurplusRat_ndrop_w892 + EqRat_w_K + ProfFundFeeYes - 1, 
+#                              data=dat,   family=binomial("logit") )
+
+
+coef.names <- c("D1","D2","D3","D4","D5","D6","Accrual","GovtMoneyRat", 
+                 "HHI","UNAgrand","FixedCostRat","SurplusRat_ndrop_w892", 
+                 "EqRat_w_K","ProfFundFeeYes" )
+
+# only IVs in the model
+
+td <- dat[ , c("Accrual","GovtMoneyRat","HHI","UNAgrand","FixedCostRat","SurplusRat_ndrop_w892","EqRat_w_K","ProfFundFeeYes") ]
+
+
+period1 <- c( c(1,0,0,0,0,0), unlist( lapply( td, quantile, 0.50, na.rm=T ) ) )
+period2 <- c( c(0,1,0,0,0,0), unlist( lapply( td, quantile, 0.50, na.rm=T ) ) )
+period3 <- c( c(0,0,1,0,0,0), unlist( lapply( td, quantile, 0.50, na.rm=T ) ) )
+period4 <- c( c(0,0,0,1,0,0), unlist( lapply( td, quantile, 0.50, na.rm=T ) ) )
+period5 <- c( c(0,0,0,0,1,0), unlist( lapply( td, quantile, 0.50, na.rm=T ) ) )
+period6 <- c( c(0,0,0,0,0,1), unlist( lapply( td, quantile, 0.50, na.rm=T ) ) )
+
+# period1[12] <- median(dat$SurplusRat_ndrop_w892, na.rm=T)
+
+# period1 <- c(1,0,0,0,0,0, 0,0,0.54,0,0,-0.49853,1.9,0)
+# period2 <- c(0,1,0,0,0,0, 0,0,0.54,0,0,-0.49853,1.9,0)
+# period3 <- c(0,0,1,0,0,0, 0,0,0.54,0,0,-0.49853,1.9,0)
+# period4 <- c(0,0,0,1,0,0, 0,0,0.54,0,0,-0.49853,1.9,0)
+# period5 <- c(0,0,0,0,1,0, 0,0,0.54,0,0,-0.49853,1.9,0)
+# period6 <- c(0,0,0,0,0,1, 0,0,0.54,0,0,-0.49853,1.9,0)
+
+
+h1 <- (    1 / ( 1 + exp(-( sum(period1 * m.03$coefficients) ))   )     )
+h2 <- (    1 / ( 1 + exp(-( sum(period2 * m.03$coefficients) ))   )     )
+h3 <- (    1 / ( 1 + exp(-( sum(period3 * m.03$coefficients) ))   )     )
+h4 <- (    1 / ( 1 + exp(-( sum(period4 * m.03$coefficients) ))   )     )
+h5 <- (    1 / ( 1 + exp(-( sum(period5 * m.03$coefficients) ))   )     )
+h6 <- (    1 / ( 1 + exp(-( sum(period6 * m.03$coefficients) ))   )     )
+
+hrc <- data.frame( age=1:6, hazard.rate=round(c(h1,h2,h3,h4,h5,h6),4) ) 
+
+src <- cumprod( (1-hrc$hazard.rate))
+
+hrc <- cbind( hrc, survival.rate=src )
+
+hrc
+
+
+par( mfrow=c(1,2) )
+
+plot( 1:6, hrc$hazard.rate, type="b", pch=19, cex=1.2, bty="n",
+      main="Hazard Rate", xlab="Nonprofit Age", ylab="Probability of Professionalizing at Age=j")
+
+plot( 1:6, src, type="b", pch=19, cex=1.2, ylim=c(0,1.1), bty="n",
+      main="Survival Curve", xlab="Nonprofit Age", ylab="Probability of Remaining Nonprofessional")
+abline( h=0.5, col="red", lty=3)
+
+
+```
+
+
+
+# FULL MODELS
+
+```{r, warning=FALSE, echo=T}
+
+###  ALL
+
+m.all <- glm( formula= prof ~ D1 + D2 + D3 + D4 + D5 + D6 + Accrual + GovtMoneyRat + HHI + 
+                             UNAgrand + FixedCostRat + SurplusRat_ndrop_w892 + EqRat_w_K + 
+                             ProfFundFeeYes - 1, 
+                             data=dat,   family=binomial("logit") )
+                             
+
+############## HEALTH
+
+dat.health <- dat[ dat$Subsector2 == "Health", ]
+
+m.health <- glm( formula= prof ~ D1 + D2 + D3 + D4 + D5 + D6 + Accrual + GovtMoneyRat + HHI + 
+                             UNAgrand + FixedCostRat + SurplusRat_ndrop_w892 + EqRat_w_K + 
+                             ProfFundFeeYes - 1, 
+                             data=dat.health,   family=binomial("logit") )
+
+# summary( m.04 )
+
+
+
+
+############ HUMAN SERVICES
+
+dat.hs <- dat[ dat$Subsector2 == "Human Svcs", ]
+
+m.hs <- glm( formula= prof ~ D1 + D2 + D3 + D4 + D5 + D6 + Accrual + GovtMoneyRat + HHI + 
+                             UNAgrand + FixedCostRat + SurplusRat_ndrop_w892 + EqRat_w_K + 
+                             ProfFundFeeYes - 1, 
+                             data=dat.hs,   family=binomial("logit") )
+
+# summary( m.05 )
+
+
+############ ARTS
+
+dat.arts <- dat[ dat$Subsector2 == "Arts", ]
+
+m.arts <- glm( formula= prof ~ D1 + D2 + D3 + D4 + D5 + D6 + Accrual + GovtMoneyRat + HHI + 
+                             UNAgrand + FixedCostRat + SurplusRat_ndrop_w892 + EqRat_w_K + 
+                             ProfFundFeeYes - 1, 
+                             data=dat.arts,   family=binomial("logit") )
+
+# summary( m.06 )
+
+
+############# EDUCATION
+
+dat.edu <- dat[ dat$Subsector2 == "Edu(Exclu Higher)" , ]
+
+m.edu <- glm( formula= prof ~ D1 + D2 + D3 + D4 + D5 + D6 + Accrual + GovtMoneyRat + HHI + 
+                             UNAgrand + FixedCostRat + SurplusRat_ndrop_w892 + EqRat_w_K + 
+                             ProfFundFeeYes - 1, 
+                             data=dat.edu,   family=binomial("logit") )
+
+# summary( m.07 )
+
+
+# ############# HIGHER ED AND HOSPITALS
+# 
+# dat.hos <- dat[ dat$Subsector2 == "Higher Edu or Hospitals" , ]
+# 
+# m.08 <- glm( formula= prof ~ D1 + D2 + D3 + D4 + D5 + D6 + Accrual + GovtMoneyRat + HHI + 
+#                              UNAgrand + FixedCostRat + SurplusRat_ndrop_w892 + EqRat_w_K + 
+#                              ProfFundFeeYes - 1, 
+#                              data=dat.hos,   family=binomial("logit") )
+# 
+# # summary( m.08 )
+
+
+
+############# PUBLIC
+
+dat.pub <- dat[ dat$Subsector2 == "Public" , ]
+
+m.pub <- glm( formula= prof ~ D1 + D2 + D3 + D4 + D5 + D6 + Accrual + GovtMoneyRat + HHI + 
+                             UNAgrand + FixedCostRat + SurplusRat_ndrop_w892 + EqRat_w_K + 
+                             ProfFundFeeYes - 1, 
+                             data=dat.pub,   family=binomial("logit") )
+
+# summary( m.09 )
+
+
+############# OTHER
+
+dat.other <- dat[ dat$Subsector2 == "Other"  , ]
+
+m.other <- glm( formula= prof ~ D1 + D2 + D3 + D4 + D5 + D6 + Accrual + GovtMoneyRat + HHI + 
+                             UNAgrand + FixedCostRat + SurplusRat_ndrop_w892 + EqRat_w_K + 
+                             ProfFundFeeYes - 1, 
+                             data=dat.other,   family=binomial("logit") )
+
+# summary( m.10 )
+
+
+
+# mtable123 <- mtable( "Combined"=m.03, "Arts"=m.06, "Health"=m.04,
+#                      "Human Services"=m.05, "Public"=m.09, "Education"=m.07, 
+#                      "Misc."=m.10,
+#                      summary.stats=c("p","N") )
+# 
+# 
+# panderOptions("digits", 2)
+# 
+# mtable123 # %>% pander
+
+
+```
+
+
+## Output
+
+```{r, results='asis' }
+
+# stargazer(linear.1, linear.2, probit.model, title="Regression Results",
+# align=TRUE, dep.var.labels=c("Overall Rating","High Rating"),
+# covariate.labels=c("Handling of Complaints","No Special Privileges",
+# "Opportunity to Learn","Performance-Based Raises","Too Critical","Advancement"),
+# omit.stat=c("LL","ser","f"), no.space=TRUE)
+
+
+stargazer( m.all, m.arts, m.health, m.hs, m.pub, m.edu, m.other, type="html", digits=2,
+           column.labels=c("All","Arts","Health","Human Services","Public","Education","Misc"),
+           title="Discrete Hazard Model Estimates",
+           dep.var.labels=c("Professionalization"),
+           no.space = TRUE,
+           out="./Results/RegTables.doc"
+         )
+
+```
+
+
+
+
+
+
+

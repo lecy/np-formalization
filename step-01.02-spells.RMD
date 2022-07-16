@@ -1,0 +1,149 @@
+---
+title: "Spells"
+author: "Jesse Lecy"
+output:
+  html_document:
+    theme: readable
+    df_print: paged
+    highlight: zenburn
+    toc: true
+    self_contained: false
+    number_sections: false
+    css: clean.css
+---
+
+
+
+```
+output: word_document
+```
+
+
+
+# SETUP
+
+```{r, warning=FALSE, message=FALSE}
+
+library( foreign )
+library( memisc )
+library( knitr )
+library( dplyr )
+library( xtable )
+library( stargazer )
+library( broom )
+library( pander )
+
+
+
+```
+
+
+
+# LOAD DATA
+
+```{r, warning=FALSE }
+
+
+dat <- readRDS( "./Data/CompleteHazardSpells.rds" )
+
+# lapply( dat, class )
+#                   
+# head( dat, 25 ) %>% pander
+```
+
+
+
+
+# SPELLS
+
+
+## Inspect Spells
+
+
+```{r}
+
+dat.sub <- dat[ ,c("ein","fisyr","age","FS_Totrev_adj","prof","JustNowProfessionalized") ]
+
+head( dat.sub, 100 ) %>% pander
+
+```
+
+
+
+
+## Typical Spell Lengths
+
+NOTE - do we want to experiment with imputing observations backwards for sensitivity analysis?
+
+NOTE - if we don't impute spell lengths backwards, should we set age to first year in dataset?
+
+```{r}
+
+# count of spells by length
+
+table( table( dat$ein ) )
+
+# proportion that professionalize
+
+sum( dat$prof ) / length(unique(dat$ein))
+
+```
+
+
+Number that never professionalize -  are right-censored because of end of study.
+
+```{r}
+sum( dat$prof == 0 & dat$age == 5 )
+
+# 2815 that never professioalize
+# 7744 orgs
+
+2815 / 7744
+
+
+```
+
+
+Those that drop out before professionalization:
+
+```{r}
+
+do.prof <- tapply( dat$prof, dat$ein, sum )
+
+these.do.not <- names(do.prof)[ do.prof == 0 ]
+
+dat.not <- dat[ dat$ein %in% these.do.not , ]
+
+nrow( dat.not )
+
+table( tapply( dat.not$age, dat.not$ein, max ) )
+
+2472 / 7744 # do not report (fail)
+
+2815 / 7744 # right-censored (alive in 2003 but small)
+
+2457 / 7744 # professionalize
+
+table( tapply( dat.not$age, dat.not$ein, max ) ) /
+
+  table( dat$age )
+
+
+```
+
+
+
+## Observation Accounting
+
+```{r}
+
+table( dat$AGE )
+
+table( dat$fisyr )
+
+table( dat$age, dat$fisyr ) %>% kable
+
+table( dat$fisyr, dat$prof ) %>% kable
+
+
+```

@@ -1,0 +1,329 @@
+---
+title: "Create Discrete Haz Dataset"
+author: "Jesse Lecy"
+output:
+  html_document:
+    theme: readable
+    df_print: paged
+    highlight: zenburn
+    toc: true
+    self_contained: false
+    number_sections: false
+    css: clean.css
+---
+
+
+
+# LOAD PACKAGES
+
+```{r, warning=FALSE, message=FALSE}
+
+library( foreign )
+library( memisc )
+library( knitr )
+library( dplyr )
+library( xtable )
+library( stargazer )
+library( broom )
+library( pander )
+
+
+
+```
+
+
+
+# BUILD HAZARD DATASET
+
+
+
+```{r, warning=FALSE }
+
+
+dat <- read.dta( "./Data/NCCS-Digitized-Ruledate-1998.dta" )
+
+head( dat ) %>% pander
+```
+
+
+## Summary Stats
+
+```{r}
+
+summary(dat) %>% pander
+
+```
+
+
+
+## Original DV
+
+```{r}
+
+table( dat$fisyr, dat$JustNowProfessionalized )
+
+prop.table( table( dat$fisyr, dat$JustNowProfessionalized ), margin=1 )
+
+table( tapply( dat$JustNowProfessionalized, dat$ein, sum, na.rm=T ) )
+
+```
+
+
+
+## Create New DV
+
+```{r}
+
+
+prof <- NULL
+
+fr <- NULL
+
+for( i in unique(dat$ein) )
+{
+  one.org <- dat[ dat$ein == i , ]
+  
+  # first.year <- min(one.org$fisyr)
+  
+  first.rev <- one.org$FS_Totrev_adj[ which.min(one.org$fisyr) ]
+  
+  fr <- c(fr,first.rev)
+  
+  if( first.rev > 100000 )
+  { 
+    spell <- rep(NA, nrow(one.org)) 
+    prof <- c( prof, spell )
+  }
+  
+  if(first.rev < 100000 )
+  {
+    spell <- ifelse( one.org$FS_Totrev_adj < 100000, 0, 1 )
+    # drop obs after professionalizes
+    num.prof.periods <- cumsum(spell)
+    is.prof <- num.prof.periods > 0
+    is.prof[ is.prof== F ] <- NA
+    post.prof.periods <- duplicated(is.prof, incomparables=NA )
+    spell[ post.prof.periods ] <- NA
+    
+    prof <- c( prof, spell )
+  }
+  
+}
+
+
+
+dat <- cbind( prof, dat )
+
+```
+
+
+```{r}
+
+
+dd <- dat[ ! is.na(dat$prof ) , ]
+
+dd <- dd[ ! is.na(dd$SurplusRat_ndrop_w892) , ]
+
+# exclude hospital or higher ed
+
+dd <- dd[ ! dd$Subsector2 == "Higher Edu or Hospitals" , ]
+
+nrow( dd )
+
+
+# First year they apear in the data
+
+table( tapply( dd$fisyr, dd$ein, min ) )
+
+# Length of spells
+
+table( table( dd$ein ))
+
+```
+
+
+
+# NEW DV
+
+Create new DV according to the rules:
+
+- Remove the ones that were born big, then dipped, then remained/surged
+- If first year of JNP reporting they report less 100k, then change JNP for previous year to zero
+- If first year of JNP reporting they report more than 100k, then change JNP for the previous year to 0
+- If born over 100k, drop all (even if dip later)
+- If currently under 100k, previous year is missing, and year before previous year was also below 100k, then impute the current JNP=0
+- If currently over 100k, previous year is missing, and year before previous year was below 100k, then impute the current JNP=1
+
+
+Here is the sample breakdown:
+
+- 13,440 unique orgs with RULEDATE 1998 in sample
+- 5,644 have first-year revenues over $100k
+- 7,796 orgs remain in the sample
+
+Length of spells for grassroots orgs:
+
+1 |   2   | 3   | 4 |   5 |   6
+==|=======|=====|====|===|=====
+1541 | 2404 |  1460 | 1016 |  866 | 509
+
+
+Which means there are 22,177 rows of data (observation periods). 
+
+There are 14 values in the SurplusRat_ndrop_w892 variable that are missing, so that drops to 22,163.
+
+There are 49 hospitals and universities, accounting for 137 total spells.
+
+After dropping we are down to 22,026.
+
+
+
+
+## Defining Other Study Vars
+
+```{r}
+
+
+D1 <- ifelse( dat$fisyr == 1998, 1, 0 )
+D2 <- ifelse( dat$fisyr == 1999, 1, 0 )
+D3 <- ifelse( dat$fisyr == 2000, 1, 0 )
+D4 <- ifelse( dat$fisyr == 2001, 1, 0 )
+D5 <- ifelse( dat$fisyr == 2002, 1, 0 )
+D6 <- ifelse( dat$fisyr == 2003, 1, 0 )
+
+
+AGE <- dat$age + 1
+
+Age2 <- AGE * AGE
+
+Age3 <- AGE * AGE * AGE
+
+Age4 <- AGE * AGE * AGE * AGE
+
+Age5 <- AGE * AGE * AGE * AGE * AGE
+
+
+
+dat <- cbind( dat, D1, D2, D3, D4, D5, D6, AGE, Age2, Age3, Age4, Age5 )
+
+rm( D1, D2, D3, D4, D5, D6, AGE, Age2, Age3, Age4, Age5, prof )
+
+```
+
+
+
+## Drop Born Large Orgs
+
+```{r}
+# number of nonprofits in sample
+
+length( unique( dat$ein ))
+
+# original number of obs
+
+nrow( dat )
+
+
+# remove the born large orgs
+
+dat <- dat[ ! is.na(dat$prof) , ]
+
+nrow( dat )
+
+```
+
+
+
+
+
+
+## Sanity Check
+
+```{r}
+
+# number of grassroots nonprofits in the sample
+
+length( unique( dat$ein ))
+
+# number that professionalize
+
+sum(dat$prof)
+
+# total proportion that professionalize
+
+sum(dat$prof) / length( unique( dat$ein ))
+
+
+# check to make sure none professionalize twice
+
+table( tapply( dat$prof, dat$ein, sum ) )
+
+
+# when do orgs professionalize
+
+table( dat$fisyr, dat$prof )
+
+prop.table( table( dat$fisyr, dat$prof ), margin=1 )
+
+```
+
+
+
+## DROP ODD CASES
+
+```{r}
+
+
+# drop 14 missing Surplus Ratio cases
+
+dat <- dat[ ! is.na(dat$SurplusRat_ndrop_w892) , ]
+
+# exclude hospital or higher ed
+
+dat <- dat[ ! dat$Subsector2 == "Higher Edu or Hospitals" , ]
+
+nrow( dat )
+
+
+```
+
+
+## CONVERT EQUITY RATIO TO THOUSANDS
+
+```{r}
+
+# convert EqRat_w to thousands to have meaningful reg coefficients
+
+summary( dat$EqRat_w )
+
+dat$EqRat_w_K <- dat$EqRat_w / 1000
+
+
+```
+
+
+
+# WRITE DATASET
+
+```{r}
+
+write.csv( dat, "./Data/CompleteHazardSpells.csv" )
+
+saveRDS( dat, "./Data/CompleteHazardSpells.rds" ) 
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

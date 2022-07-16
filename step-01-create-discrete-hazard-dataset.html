@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Jesse Lecy" />
+
+
+<title>Create Discrete Haz Dataset</title>
+
+<script src="step-01-create-discrete-hazard-dataset_files/header-attrs-2.14/header-attrs.js"></script>
+<script src="step-01-create-discrete-hazard-dataset_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="step-01-create-discrete-hazard-dataset_files/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="step-01-create-discrete-hazard-dataset_files/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="step-01-create-discrete-hazard-dataset_files/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="step-01-create-discrete-hazard-dataset_files/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="step-01-create-discrete-hazard-dataset_files/navigation-1.1/tabsets.js"></script>
+<link href="step-01-create-discrete-hazard-dataset_files/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="step-01-create-discrete-hazard-dataset_files/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="clean.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Create Discrete Haz Dataset</h1>
+<h4 class="author">Jesse Lecy</h4>
+
+</div>
+
+<div id="TOC">
+<ul>
+<li><a href="#load-packages">LOAD PACKAGES</a></li>
+<li><a href="#build-hazard-dataset">BUILD HAZARD DATASET</a>
+<ul>
+<li><a href="#summary-stats">Summary Stats</a></li>
+<li><a href="#original-dv">Original DV</a></li>
+<li><a href="#create-new-dv">Create New DV</a></li>
+</ul></li>
+<li><a href="#new-dv">NEW DV</a>
+<ul>
+<li><a href="#defining-other-study-vars">Defining Other Study
+Vars</a></li>
+<li><a href="#drop-born-large-orgs">Drop Born Large Orgs</a></li>
+<li><a href="#sanity-check">Sanity Check</a></li>
+<li><a href="#drop-odd-cases">DROP ODD CASES</a></li>
+<li><a href="#convert-equity-ratio-to-thousands">CONVERT EQUITY RATIO TO
+THOUSANDS</a></li>
+</ul></li>
+<li><a href="#write-dataset">WRITE DATASET</a></li>
+</ul>
+</div>
+
+<div id="load-packages" class="section level1">
+<h1>LOAD PACKAGES</h1>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( foreign )</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( memisc )</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( knitr )</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( dplyr )</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( xtable )</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( stargazer )</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( broom )</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>( pander )</span></code></pre></div>
+</div>
+<div id="build-hazard-dataset" class="section level1">
+<h1>BUILD HAZARD DATASET</h1>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">read.dta</span>( <span class="st">&quot;./Data/NCCS-Digitized-Ruledate-1998.dta&quot;</span> )</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>( dat ) <span class="sc">%&gt;%</span> pander</span></code></pre></div>
+<table style="width:100%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="15%" />
+<col width="10%" />
+<col width="13%" />
+<col width="8%" />
+<col width="21%" />
+<col width="15%" />
+<col width="15%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">ein</th>
+<th align="center">fisyr</th>
+<th align="center">Accrual</th>
+<th align="center">age</th>
+<th align="center">FS_Totrev_adj</th>
+<th align="center">UNAgrand</th>
+<th align="center">HHI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">10211502</td>
+<td align="center">1999</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">77197</td>
+<td align="center">0</td>
+<td align="center">0.3314</td>
+</tr>
+<tr class="even">
+<td align="center">10211502</td>
+<td align="center">2000</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">302158</td>
+<td align="center">0</td>
+<td align="center">0.6505</td>
+</tr>
+<tr class="odd">
+<td align="center">10400759</td>
+<td align="center">1998</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">128926</td>
+<td align="center">57.66</td>
+<td align="center">0.6177</td>
+</tr>
+<tr class="even">
+<td align="center">10400759</td>
+<td align="center">1999</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">194122</td>
+<td align="center">233.4</td>
+<td align="center">0.5867</td>
+</tr>
+<tr class="odd">
+<td align="center">10400759</td>
+<td align="center">2000</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">72074</td>
+<td align="center">268</td>
+<td align="center">0.4975</td>
+</tr>
+<tr class="even">
+<td align="center">10400759</td>
+<td align="center">2001</td>
+<td align="center">0</td>
+<td align="center">3</td>
+<td align="center">244222</td>
+<td align="center">253.1</td>
+<td align="center">0.9673</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Table continues below</caption>
+<colgroup>
+<col width="18%" />
+<col width="18%" />
+<col width="12%" />
+<col width="29%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">GovtMoneyRat</th>
+<th align="center">FixedCostRat</th>
+<th align="center">EqRat_w</th>
+<th align="center">SurplusRat_ndrop_w892</th>
+<th align="center">ProfFundFeeYes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0.3396</td>
+<td align="center">0</td>
+<td align="center">463788</td>
+<td align="center">0.2534</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">0.06093</td>
+<td align="center">0.3853</td>
+<td align="center">688635</td>
+<td align="center">0.3798</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">0.001637</td>
+<td align="center">0.03859</td>
+<td align="center">4108</td>
+<td align="center">0.3798</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">0.2732</td>
+<td align="center">0.2023</td>
+<td align="center">7.711</td>
+<td align="center">0.3798</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">0.2463</td>
+<td align="center">7.729</td>
+<td align="center">-0.02354</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">0</td>
+<td align="center">0.4326</td>
+<td align="center">12.2</td>
+<td align="center">0.3798</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+<table style="width:100%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="27%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Subsector2</th>
+<th align="center">FY1998</th>
+<th align="center">FY1999</th>
+<th align="center">FY2000</th>
+<th align="center">FY2001</th>
+<th align="center">FY2002</th>
+<th align="center">FY2003</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Edu(Exclu Higher)</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">Edu(Exclu Higher)</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">Edu(Exclu Higher)</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">Edu(Exclu Higher)</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">Edu(Exclu Higher)</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">Edu(Exclu Higher)</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+<table style="width:49%;">
+<colgroup>
+<col width="36%" />
+<col width="12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">JustNowProfessionalized</th>
+<th align="center">waffle</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">NA</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+<div id="summary-stats" class="section level2">
+<h2>Summary Stats</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(dat) <span class="sc">%&gt;%</span> pander</span></code></pre></div>
+<table style="width:96%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="27%" />
+<col width="20%" />
+<col width="23%" />
+<col width="23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">ein</th>
+<th align="center">fisyr</th>
+<th align="center">Accrual</th>
+<th align="center">age</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Min. : 10211502</td>
+<td align="center">Min. :1998</td>
+<td align="center">Min. :0.0000</td>
+<td align="center">Min. :0.000</td>
+</tr>
+<tr class="even">
+<td align="center">1st Qu.:311586601</td>
+<td align="center">1st Qu.:1999</td>
+<td align="center">1st Qu.:0.0000</td>
+<td align="center">1st Qu.:1.000</td>
+</tr>
+<tr class="odd">
+<td align="center">Median :522067136</td>
+<td align="center">Median :2000</td>
+<td align="center">Median :0.0000</td>
+<td align="center">Median :2.000</td>
+</tr>
+<tr class="even">
+<td align="center">Mean :507363852</td>
+<td align="center">Mean :2001</td>
+<td align="center">Mean :0.4084</td>
+<td align="center">Mean :2.513</td>
+</tr>
+<tr class="odd">
+<td align="center">3rd Qu.:742838818</td>
+<td align="center">3rd Qu.:2002</td>
+<td align="center">3rd Qu.:1.0000</td>
+<td align="center">3rd Qu.:4.000</td>
+</tr>
+<tr class="even">
+<td align="center">Max. :996081402</td>
+<td align="center">Max. :2003</td>
+<td align="center">Max. :1.0000</td>
+<td align="center">Max. :5.000</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Table continues below</caption>
+<colgroup>
+<col width="27%" />
+<col width="26%" />
+<col width="23%" />
+<col width="23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">FS_Totrev_adj</th>
+<th align="center">UNAgrand</th>
+<th align="center">HHI</th>
+<th align="center">GovtMoneyRat</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Min. : -4359</td>
+<td align="center">Min. :-352553.2</td>
+<td align="center">Min. :0.0000</td>
+<td align="center">Min. :0.0000</td>
+</tr>
+<tr class="even">
+<td align="center">1st Qu.: 34215</td>
+<td align="center">1st Qu.: 0.0</td>
+<td align="center">1st Qu.:0.5403</td>
+<td align="center">1st Qu.:0.0000</td>
+</tr>
+<tr class="odd">
+<td align="center">Median : 112923</td>
+<td align="center">Median : 0.0</td>
+<td align="center">Median :0.8701</td>
+<td align="center">Median :0.0000</td>
+</tr>
+<tr class="even">
+<td align="center">Mean : 1943535</td>
+<td align="center">Mean : 679.2</td>
+<td align="center">Mean :0.7361</td>
+<td align="center">Mean :0.1032</td>
+</tr>
+<tr class="odd">
+<td align="center">3rd Qu.: 366257</td>
+<td align="center">3rd Qu.: 44.8</td>
+<td align="center">3rd Qu.:0.9993</td>
+<td align="center">3rd Qu.:0.0000</td>
+</tr>
+<tr class="even">
+<td align="center">Max. :1274332605</td>
+<td align="center">Max. :1276196.1</td>
+<td align="center">Max. :1.0000</td>
+<td align="center">Max. :1.0000</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>Table continues below</caption>
+<colgroup>
+<col width="22%" />
+<col width="24%" />
+<col width="30%" />
+<col width="22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">FixedCostRat</th>
+<th align="center">EqRat_w</th>
+<th align="center">SurplusRat_ndrop_w892</th>
+<th align="center">ProfFundFeeYes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Min. :0.00000</td>
+<td align="center">Min. : 0.0</td>
+<td align="center">Min. :-6.76835</td>
+<td align="center">Min. :0.00000</td>
+</tr>
+<tr class="even">
+<td align="center">1st Qu.:0.00000</td>
+<td align="center">1st Qu.: 1.9</td>
+<td align="center">1st Qu.:-0.49853</td>
+<td align="center">1st Qu.:0.00000</td>
+</tr>
+<tr class="odd">
+<td align="center">Median :0.00000</td>
+<td align="center">Median : 42.6</td>
+<td align="center">Median :-0.01344</td>
+<td align="center">Median :0.00000</td>
+</tr>
+<tr class="even">
+<td align="center">Mean :0.06252</td>
+<td align="center">Mean : 74747.7</td>
+<td align="center">Mean :-1.08009</td>
+<td align="center">Mean :0.04067</td>
+</tr>
+<tr class="odd">
+<td align="center">3rd Qu.:0.06221</td>
+<td align="center">3rd Qu.: 24912.0</td>
+<td align="center">3rd Qu.: 0.14060</td>
+<td align="center">3rd Qu.:0.00000</td>
+</tr>
+<tr class="even">
+<td align="center">Max. :1.39599</td>
+<td align="center">Max. :2605173.0</td>
+<td align="center">Max. : 0.37984</td>
+<td align="center">Max. :1.00000</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA’s :16</td>
+<td align="center">NA</td>
+</tr>
+</tbody>
+</table>
+<table style="width:90%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="43%" />
+<col width="23%" />
+<col width="23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Subsector2</th>
+<th align="center">FY1998</th>
+<th align="center">FY1999</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Arts : 4189</td>
+<td align="center">Min. :0.0000</td>
+<td align="center">Min. :0.0000</td>
+</tr>
+<tr class="even">
+<td align="center">Health : 4023</td>
+<td align="center">1st Qu.:0.0000</td>
+<td align="center">1st Qu.:0.0000</td>
+</tr>
+<tr class="odd">
+<td align="center">Human Svcs :16338</td>
+<td align="center">Median :0.0000</td>
+<td align="center">Median :0.0000</td>
+</tr>
+<tr class="even">
+<td align="center">Public : 6901</td>
+<td align="center">Mean :0.1312</td>
+<td align="center">Mean :0.1891</td>
+</tr>
+<tr class="odd">
+<td align="center">Edu(Exclu Higher) : 7910</td>
+<td align="center">3rd Qu.:0.0000</td>
+<td align="center">3rd Qu.:0.0000</td>
+</tr>
+<tr class="even">
+<td align="center">Higher Edu or Hospitals: 765</td>
+<td align="center">Max. :1.0000</td>
+<td align="center">Max. :1.0000</td>
+</tr>
+<tr class="odd">
+<td align="center">Other : 6243</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+</tbody>
+</table>
+<table style="width:94%;">
+<caption>Table continues below</caption>
+<colgroup>
+<col width="23%" />
+<col width="23%" />
+<col width="23%" />
+<col width="23%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">FY2000</th>
+<th align="center">FY2001</th>
+<th align="center">FY2002</th>
+<th align="center">FY2003</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Min. :0.0000</td>
+<td align="center">Min. :0.0000</td>
+<td align="center">Min. :0.0000</td>
+<td align="center">Min. :0.0000</td>
+</tr>
+<tr class="even">
+<td align="center">1st Qu.:0.0000</td>
+<td align="center">1st Qu.:0.0000</td>
+<td align="center">1st Qu.:0.0000</td>
+<td align="center">1st Qu.:0.0000</td>
+</tr>
+<tr class="odd">
+<td align="center">Median :0.0000</td>
+<td align="center">Median :0.0000</td>
+<td align="center">Median :0.0000</td>
+<td align="center">Median :0.0000</td>
+</tr>
+<tr class="even">
+<td align="center">Mean :0.1845</td>
+<td align="center">Mean :0.1799</td>
+<td align="center">Mean :0.1611</td>
+<td align="center">Mean :0.1542</td>
+</tr>
+<tr class="odd">
+<td align="center">3rd Qu.:0.0000</td>
+<td align="center">3rd Qu.:0.0000</td>
+<td align="center">3rd Qu.:0.0000</td>
+<td align="center">3rd Qu.:0.0000</td>
+</tr>
+<tr class="even">
+<td align="center">Max. :1.0000</td>
+<td align="center">Max. :1.0000</td>
+<td align="center">Max. :1.0000</td>
+<td align="center">Max. :1.0000</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+</tr>
+</tbody>
+</table>
+<table style="width:53%;">
+<colgroup>
+<col width="36%" />
+<col width="16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">JustNowProfessionalized</th>
+<th align="center">waffle</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Min. :0.00</td>
+<td align="center">Min. :0</td>
+</tr>
+<tr class="even">
+<td align="center">1st Qu.:0.00</td>
+<td align="center">1st Qu.:0</td>
+</tr>
+<tr class="odd">
+<td align="center">Median :0.00</td>
+<td align="center">Median :0</td>
+</tr>
+<tr class="even">
+<td align="center">Mean :0.19</td>
+<td align="center">Mean :0</td>
+</tr>
+<tr class="odd">
+<td align="center">3rd Qu.:0.00</td>
+<td align="center">3rd Qu.:0</td>
+</tr>
+<tr class="even">
+<td align="center">Max. :1.00</td>
+<td align="center">Max. :0</td>
+</tr>
+<tr class="odd">
+<td align="center">NA’s :32225</td>
+<td align="center">NA</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="original-dv" class="section level2">
+<h2>Original DV</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>( dat<span class="sc">$</span>fisyr, dat<span class="sc">$</span>JustNowProfessionalized )</span></code></pre></div>
+<pre><code>##       
+##           0    1
+##   1998    0    0
+##   1999 1646  623
+##   2000 2396  712
+##   2001 2523  546
+##   2002 2544  438
+##   2003 2359  357</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>( <span class="fu">table</span>( dat<span class="sc">$</span>fisyr, dat<span class="sc">$</span>JustNowProfessionalized ), <span class="at">margin=</span><span class="dv">1</span> )</span></code></pre></div>
+<pre><code>##       
+##                0         1
+##   1998                    
+##   1999 0.7254297 0.2745703
+##   2000 0.7709138 0.2290862
+##   2001 0.8220919 0.1779081
+##   2002 0.8531187 0.1468813
+##   2003 0.8685567 0.1314433</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>( <span class="fu">tapply</span>( dat<span class="sc">$</span>JustNowProfessionalized, dat<span class="sc">$</span>ein, sum, <span class="at">na.rm=</span>T ) )</span></code></pre></div>
+<pre><code>## 
+##     0     1 
+## 10764  2676</code></pre>
+</div>
+<div id="create-new-dv" class="section level2">
+<h2>Create New DV</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>prof <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>fr <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>( i <span class="cf">in</span> <span class="fu">unique</span>(dat<span class="sc">$</span>ein) )</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  one.org <span class="ot">&lt;-</span> dat[ dat<span class="sc">$</span>ein <span class="sc">==</span> i , ]</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># first.year &lt;- min(one.org$fisyr)</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  first.rev <span class="ot">&lt;-</span> one.org<span class="sc">$</span>FS_Totrev_adj[ <span class="fu">which.min</span>(one.org<span class="sc">$</span>fisyr) ]</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  fr <span class="ot">&lt;-</span> <span class="fu">c</span>(fr,first.rev)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>( first.rev <span class="sc">&gt;</span> <span class="dv">100000</span> )</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  { </span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>    spell <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="fu">nrow</span>(one.org)) </span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>    prof <span class="ot">&lt;-</span> <span class="fu">c</span>( prof, spell )</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(first.rev <span class="sc">&lt;</span> <span class="dv">100000</span> )</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    spell <span class="ot">&lt;-</span> <span class="fu">ifelse</span>( one.org<span class="sc">$</span>FS_Totrev_adj <span class="sc">&lt;</span> <span class="dv">100000</span>, <span class="dv">0</span>, <span class="dv">1</span> )</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    <span class="co"># drop obs after professionalizes</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>    num.prof.periods <span class="ot">&lt;-</span> <span class="fu">cumsum</span>(spell)</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>    is.prof <span class="ot">&lt;-</span> num.prof.periods <span class="sc">&gt;</span> <span class="dv">0</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>    is.prof[ is.prof<span class="sc">==</span> F ] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    post.prof.periods <span class="ot">&lt;-</span> <span class="fu">duplicated</span>(is.prof, <span class="at">incomparables=</span><span class="cn">NA</span> )</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    spell[ post.prof.periods ] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>    prof <span class="ot">&lt;-</span> <span class="fu">c</span>( prof, spell )</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">cbind</span>( prof, dat )</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">&lt;-</span> dat[ <span class="sc">!</span> <span class="fu">is.na</span>(dat<span class="sc">$</span>prof ) , ]</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">&lt;-</span> dd[ <span class="sc">!</span> <span class="fu">is.na</span>(dd<span class="sc">$</span>SurplusRat_ndrop_w892) , ]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># exclude hospital or higher ed</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>dd <span class="ot">&lt;-</span> dd[ <span class="sc">!</span> dd<span class="sc">$</span>Subsector2 <span class="sc">==</span> <span class="st">&quot;Higher Edu or Hospitals&quot;</span> , ]</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>( dd )</span></code></pre></div>
+<pre><code>## [1] 22026</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># First year they apear in the data</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>( <span class="fu">tapply</span>( dd<span class="sc">$</span>fisyr, dd<span class="sc">$</span>ein, min ) )</span></code></pre></div>
+<pre><code>## 
+## 1998 1999 2000 2001 2002 2003 
+## 2986 2237 1027  760  424  310</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Length of spells</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>( <span class="fu">table</span>( dd<span class="sc">$</span>ein ))</span></code></pre></div>
+<pre><code>## 
+##    1    2    3    4    5    6 
+## 1535 2384 1450 1010  857  508</code></pre>
+</div>
+</div>
+<div id="new-dv" class="section level1">
+<h1>NEW DV</h1>
+<p>Create new DV according to the rules:</p>
+<ul>
+<li>Remove the ones that were born big, then dipped, then
+remained/surged</li>
+<li>If first year of JNP reporting they report less 100k, then change
+JNP for previous year to zero</li>
+<li>If first year of JNP reporting they report more than 100k, then
+change JNP for the previous year to 0</li>
+<li>If born over 100k, drop all (even if dip later)</li>
+<li>If currently under 100k, previous year is missing, and year before
+previous year was also below 100k, then impute the current JNP=0</li>
+<li>If currently over 100k, previous year is missing, and year before
+previous year was below 100k, then impute the current JNP=1</li>
+</ul>
+<p>Here is the sample breakdown:</p>
+<ul>
+<li>13,440 unique orgs with RULEDATE 1998 in sample</li>
+<li>5,644 have first-year revenues over $100k</li>
+<li>7,796 orgs remain in the sample</li>
+</ul>
+<p>Length of spells for grassroots orgs:</p>
+<p>1 | 2 | 3 | 4 | 5 | 6 ==|=======|=====|====|===|===== 1541 | 2404 |
+1460 | 1016 | 866 | 509</p>
+<p>Which means there are 22,177 rows of data (observation periods).</p>
+<p>There are 14 values in the SurplusRat_ndrop_w892 variable that are
+missing, so that drops to 22,163.</p>
+<p>There are 49 hospitals and universities, accounting for 137 total
+spells.</p>
+<p>After dropping we are down to 22,026.</p>
+<div id="defining-other-study-vars" class="section level2">
+<h2>Defining Other Study Vars</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>D1 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>( dat<span class="sc">$</span>fisyr <span class="sc">==</span> <span class="dv">1998</span>, <span class="dv">1</span>, <span class="dv">0</span> )</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>D2 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>( dat<span class="sc">$</span>fisyr <span class="sc">==</span> <span class="dv">1999</span>, <span class="dv">1</span>, <span class="dv">0</span> )</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>D3 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>( dat<span class="sc">$</span>fisyr <span class="sc">==</span> <span class="dv">2000</span>, <span class="dv">1</span>, <span class="dv">0</span> )</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>D4 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>( dat<span class="sc">$</span>fisyr <span class="sc">==</span> <span class="dv">2001</span>, <span class="dv">1</span>, <span class="dv">0</span> )</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>D5 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>( dat<span class="sc">$</span>fisyr <span class="sc">==</span> <span class="dv">2002</span>, <span class="dv">1</span>, <span class="dv">0</span> )</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>D6 <span class="ot">&lt;-</span> <span class="fu">ifelse</span>( dat<span class="sc">$</span>fisyr <span class="sc">==</span> <span class="dv">2003</span>, <span class="dv">1</span>, <span class="dv">0</span> )</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>AGE <span class="ot">&lt;-</span> dat<span class="sc">$</span>age <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>Age2 <span class="ot">&lt;-</span> AGE <span class="sc">*</span> AGE</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>Age3 <span class="ot">&lt;-</span> AGE <span class="sc">*</span> AGE <span class="sc">*</span> AGE</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>Age4 <span class="ot">&lt;-</span> AGE <span class="sc">*</span> AGE <span class="sc">*</span> AGE <span class="sc">*</span> AGE</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>Age5 <span class="ot">&lt;-</span> AGE <span class="sc">*</span> AGE <span class="sc">*</span> AGE <span class="sc">*</span> AGE <span class="sc">*</span> AGE</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> <span class="fu">cbind</span>( dat, D1, D2, D3, D4, D5, D6, AGE, Age2, Age3, Age4, Age5 )</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span>( D1, D2, D3, D4, D5, D6, AGE, Age2, Age3, Age4, Age5, prof )</span></code></pre></div>
+</div>
+<div id="drop-born-large-orgs" class="section level2">
+<h2>Drop Born Large Orgs</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of nonprofits in sample</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>( <span class="fu">unique</span>( dat<span class="sc">$</span>ein ))</span></code></pre></div>
+<pre><code>## [1] 13440</code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># original number of obs</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>( dat )</span></code></pre></div>
+<pre><code>## [1] 46369</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.dta</span>( dat, <span class="st">&quot;./Data/Aug_Profess_Build_Data_Ruledate1998_vNoWafflesParedwRev_FROMJESSE.dta&quot;</span> )</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co"># remove the born large orgs</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat[ <span class="sc">!</span> <span class="fu">is.na</span>(dat<span class="sc">$</span>prof) , ]</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>( dat )</span></code></pre></div>
+<pre><code>## [1] 22177</code></pre>
+</div>
+<div id="sanity-check" class="section level2">
+<h2>Sanity Check</h2>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number of grassroots nonprofits in the sample</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">length</span>( <span class="fu">unique</span>( dat<span class="sc">$</span>ein ))</span></code></pre></div>
+<pre><code>## [1] 7796</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># number that professionalize</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(dat<span class="sc">$</span>prof)</span></code></pre></div>
+<pre><code>## [1] 2474</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># total proportion that professionalize</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(dat<span class="sc">$</span>prof) <span class="sc">/</span> <span class="fu">length</span>( <span class="fu">unique</span>( dat<span class="sc">$</span>ein ))</span></code></pre></div>
+<pre><code>## [1] 0.3173422</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># check to make sure none professionalize twice</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>( <span class="fu">tapply</span>( dat<span class="sc">$</span>prof, dat<span class="sc">$</span>ein, sum ) )</span></code></pre></div>
+<pre><code>## 
+##    0    1 
+## 5322 2474</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># when do orgs professionalize</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>( dat<span class="sc">$</span>fisyr, dat<span class="sc">$</span>prof )</span></code></pre></div>
+<pre><code>##       
+##           0    1
+##   1998 3008    0
+##   1999 3898  623
+##   2000 3519  685
+##   2001 3430  504
+##   2002 3016  352
+##   2003 2832  310</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">prop.table</span>( <span class="fu">table</span>( dat<span class="sc">$</span>fisyr, dat<span class="sc">$</span>prof ), <span class="at">margin=</span><span class="dv">1</span> )</span></code></pre></div>
+<pre><code>##       
+##                 0          1
+##   1998 1.00000000 0.00000000
+##   1999 0.86219863 0.13780137
+##   2000 0.83705994 0.16294006
+##   2001 0.87188612 0.12811388
+##   2002 0.89548694 0.10451306
+##   2003 0.90133673 0.09866327</code></pre>
+</div>
+<div id="drop-odd-cases" class="section level2">
+<h2>DROP ODD CASES</h2>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># drop 14 missing Surplus Ratio cases</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat[ <span class="sc">!</span> <span class="fu">is.na</span>(dat<span class="sc">$</span>SurplusRat_ndrop_w892) , ]</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co"># exclude hospital or higher ed</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>dat <span class="ot">&lt;-</span> dat[ <span class="sc">!</span> dat<span class="sc">$</span>Subsector2 <span class="sc">==</span> <span class="st">&quot;Higher Edu or Hospitals&quot;</span> , ]</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>( dat )</span></code></pre></div>
+<pre><code>## [1] 22026</code></pre>
+</div>
+<div id="convert-equity-ratio-to-thousands" class="section level2">
+<h2>CONVERT EQUITY RATIO TO THOUSANDS</h2>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># convert EqRat_w to thousands to have meaningful reg coefficients</span></span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>( dat<span class="sc">$</span>EqRat_w )</span></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       0       3    4173   29615   28173 2605173</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>dat<span class="sc">$</span>EqRat_w_K <span class="ot">&lt;-</span> dat<span class="sc">$</span>EqRat_w <span class="sc">/</span> <span class="dv">1000</span></span></code></pre></div>
+</div>
+</div>
+<div id="write-dataset" class="section level1">
+<h1>WRITE DATASET</h1>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>( dat, <span class="st">&quot;CompleteHazardSpells.csv&quot;</span> )</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>( dat, <span class="st">&quot;./Data/CompleteHazardSpells.rds&quot;</span> ) </span></code></pre></div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
