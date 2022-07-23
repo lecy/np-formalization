@@ -72,13 +72,17 @@ ratios, and the accumulation of unrestricted assets have modest to no effects.
 
 ![image](https://user-images.githubusercontent.com/1209099/180621196-b118db3f-ba0b-4753-87f1-987d9a13a116.png)
 
-<br> 
-
 *Broadly, investment in managerial infrastructure is a strong indicator of commitment to growth. We observe that nonprofits which invest in fundraising and accounting capacity are more likely to successfully transition to the stage of formalization and expansion. Accrual accounting, on the contrary, is required to comply with requirements of several public and foundation revenue sources, but it is not as strong of a predictor as professional fundraising.*
 
 *Financial slack is also a strong predictor of the transition to the formalization phase, but most prominently through the surplus ratio and much more modest for the equity ratio, fixed cost ratio, and UNAs. All have positive impacts on the likelihood of escaping the earlier life phase, but surplus ratio (UNAs) has one of the largest effects on the probability of entering the formalization stage in the full model (0.381), whereas the impact of the equity ratio (0.114), the fixed cost ratio (0.042), and UNAs (0.098) are approximately one quarter to one tenth as strong. Despite their importance in the literature, neither the equity ratio nor the percentage of fixed costs have a significant impact on more than half of the subsectors. This may be because these are typically measures of investment in things such as facilities and equipment, which might not be important or acquirable at this life stage for nonprofits. Similarly, an above-average endowment (UNAs) is consistently significant in the models across subsectors, but the impact is also consistently small (0.098).*
 
 *On the revenue side, government grants also have a large and positive impact on formalization, a finding that is surprisingly uniform across sectors. This supports the findings of Kim and Bradach (2012) regarding the stabilizing effect of government funds, in addition to government’s general preference for formalization (Stewart & Faulk, 2014). The necessary development of institutional capacity and resources to manage government funding directly supports the logic of the formalization model.* 
+
+<br>
+<hr>
+<br>
+<br>
+
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
 
