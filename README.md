@@ -38,6 +38,7 @@ ratios, and the accumulation of unrestricted assets have modest to no effects.
 </div>
 
 <br>
+<br>
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/lecy/np-professionalization/main/Results/effect-sizes.png" width="500" />
