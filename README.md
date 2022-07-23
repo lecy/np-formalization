@@ -88,6 +88,9 @@ ratios, and the accumulation of unrestricted assets have modest to no effects.
 
 
 <br> 
+
+<a class="button" href="https://github.com/lecy/np-formalization/issues/new/choose">Discuss</a>
+
 <br>
 
 
@@ -123,6 +126,23 @@ ratios, and the accumulation of unrestricted assets have modest to no effects.
 
 .column {
   flex: 50%;
+}
+  
+.button {
+  background-color: white;
+  color: #337ab7;
+  border: 1px solid black;
+  padding: 7px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+.button:hover {
+  background-color: #337ab7; /* blue */
+  color: white;
 }
 </style>
 
