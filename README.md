@@ -4,9 +4,20 @@
 <br>
 
 
-### <img height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/> [FILES](https://github.com/lecy/np-professionalization) • [DATA](https://github.com/lecy/np-professionalization/tree/main/Data) 
+<div class="row">
+  <div class="column">
+    <img height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/> <h3>[FILES](https://github.com/lecy/np-professionalization) •     [DATA](https://github.com/lecy/np-professionalization/tree/main/Data) </h3>
 
-> REPLICATION CODE + DATA FOR:
+    <blockquote>REPLICATION CODE + DATA FOR:</blockquote>
+  </div>
+  
+  <div class="column">
+   <p align="center">
+   <img src="https://raw.githubusercontent.com/lecy/np-professionalization/main/Results/effect-sizes.png" width="500" />
+   </p>
+  </div>
+</div>
+
 
 <br> 
 <br>
@@ -37,12 +48,6 @@ ratios, and the accumulation of unrestricted assets have modest to no effects.
 </h3>
 </div>
 
-<br>
-<br>
-
-<p align="center">
-<img src="https://raw.githubusercontent.com/lecy/np-professionalization/main/Results/effect-sizes.png" width="500" />
-</p>
 
 <br>
 <br>
