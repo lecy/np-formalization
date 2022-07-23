@@ -58,6 +58,10 @@ ratios, and the accumulation of unrestricted assets have modest to no effects.
   
   <div class="column">
     
+    <br>
+    <br>
+    <br>
+    
     <ul style="list-style-type:circle">
       <li><a href="https://lecy.github.io/np-formalization/step-01-create-discrete-hazard-dataset.html">Step-01 Hazard Model Panel Construction</a></li>
       <ul>
