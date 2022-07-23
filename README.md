@@ -14,12 +14,12 @@ All files available on [GITHUB](https://github.com/lecy/np-professionalization)
 
 Replication Files:  
 
-* [Step-01 Hazard Model Panel Construction](step-01-create-discrete-hazard-dataset.html)
-  - [Descriptives](step-01.01-descriptive-statistics.html)
-  - [Harzard Spells](step-01.02-spells.html)
-* [Step-02 Model Specification](step-02-specify-models.html)
-* [Step-03 Generate Effect Sizes](step-03-calculate-effects.html)
-* [Step-04 Formatted Paper Graphs](step-04-create-graphs-for-paper.html)
+* [Step-01 Hazard Model Panel Construction](https://lecy.github.io/np-formalization/step-01-create-discrete-hazard-dataset.html)
+  - [Descriptives](https://lecy.github.io/np-formalization/step-01.01-descriptive-statistics.html)
+  - [Harzard Spells](https://lecy.github.io/np-formalization/step-01.02-spells.html)
+* [Step-02 Model Specification](https://lecy.github.io/np-formalization/step-02-specify-models.html)
+* [Step-03 Generate Effect Sizes](https://lecy.github.io/np-formalization/step-03-calculate-effects.html)
+* [Step-04 Formatted Paper Graphs](https://lecy.github.io/np-formalization/step-04-create-graphs-for-paper.html)
 
 [Formatted Tables](https://github.com/lecy/np-professionalization/tree/main/Results)
 
