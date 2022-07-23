@@ -10,7 +10,9 @@ Replication code + data for:
 
 <br>
 
-<img src="https://raw.githubusercontent.com/lecy/np-professionalization/main/Results/effect-sizes.png" width="250" />
+<p align="center">
+<img src="https://raw.githubusercontent.com/lecy/np-professionalization/main/Results/effect-sizes.png" width="500" />
+</p>
 
 <br>
 
