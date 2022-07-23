@@ -6,15 +6,17 @@
 
 <div class="row">
   <div class="column">
-    <img height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/> <h3>[FILES](https://github.com/lecy/np-professionalization) •     [DATA](https://github.com/lecy/np-professionalization/tree/main/Data) </h3>
+    <img height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/> 
+    <h3> <a href="https://github.com/lecy/np-professionalization"><b>FILES</b></a> • 
+         <a href="https://github.com/lecy/np-professionalization/tree/main/Data"><b>DATA</b></a>  </h3>
 
     <blockquote>REPLICATION CODE + DATA FOR:</blockquote>
   </div>
   
   <div class="column">
-   <p align="center">
-   <img src="https://raw.githubusercontent.com/lecy/np-professionalization/main/Results/effect-sizes.png" width="500" />
-   </p>
+    <p align="center">
+    <img src="https://raw.githubusercontent.com/lecy/np-professionalization/main/Results/effect-sizes.png" width="500" />
+    </p>
   </div>
 </div>
 
