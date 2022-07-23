@@ -8,6 +8,12 @@ Replication code + data for:
 
 -----
 
+
+![](https://raw.githubusercontent.com/lecy/np-professionalization/main/Results/effect-sizes.png =250x)
+
+-----------
+
+
 All files available on [GITHUB](https://github.com/lecy/np-professionalization)
 
 [DATA](https://github.com/lecy/np-professionalization/tree/main/Data) 
@@ -24,5 +30,9 @@ Replication Files:
 [Formatted Tables](https://github.com/lecy/np-professionalization/tree/main/Results)
 
 
+------------
 
-![](https://raw.githubusercontent.com/lecy/np-professionalization/main/Results/effect-sizes.png)
+![image](https://user-images.githubusercontent.com/1209099/180621196-b118db3f-ba0b-4753-87f1-987d9a13a116.png)
+)
+
+
