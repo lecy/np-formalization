@@ -7,7 +7,7 @@
 
 -----
 
-## Searing, E. A., & Lecy, J. D. (2022). Growing Up Nonprofit: Predictors of Early-Stage Nonprofit Formalization.*Nonprofit and Voluntary Sector Quarterly*, 51(3), 680-698. [**PDF**](https://github.com/lecy/np-professionalization/raw/main/searing-lecy-growing-up-nonprofit.pdf)
+## Searing, E. A., & Lecy, J. D. (2022). Growing Up Nonprofit: Predictors of Early-Stage Nonprofit Formalization.*Nonprofit and Voluntary Sector Quarterly*, 51(3), 680-698. [**NVSQ**[(https://journals.sagepub.com/doi/abs/10.1177/08997640211014280#) [**PDF**](https://github.com/lecy/np-professionalization/raw/main/searing-lecy-growing-up-nonprofit.pdf)
 
 [<i class="ai ai-google-scholar-square ai-2x"></i>](https://scholar.google.com/citations?user=AO5J8IMAAAAJ&hl=en) Elizabeth Searing  •   [<i class="ai ai-google-scholar-square ai-2x"></i>](https://scholar.google.com/citations?user=Ir8H4wMAAAAJ&hl=en)   Jesse Lecy 
 
