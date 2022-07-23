@@ -1,4 +1,8 @@
 
+<br>
+<br>
+<br>
+
 > Replication code + data for:
 
 -----
@@ -32,6 +36,7 @@ ratios, and the accumulation of unrestricted assets have modest to no effects.
 
 -----------
 
+<br>
 
 <img height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/> [FILES](https://github.com/lecy/np-professionalization) • [DATA](https://github.com/lecy/np-professionalization/tree/main/Data) 
 
@@ -44,6 +49,9 @@ Replication Steps:
 * [Step-03 Generate Effect Sizes](https://lecy.github.io/np-formalization/step-03-calculate-effects.html)
 * [Step-04 Formatted Paper Graphs](https://lecy.github.io/np-formalization/step-04-create-graphs-for-paper.html)
   - [Formatted Tables](https://github.com/lecy/np-professionalization/tree/main/Results)  
+
+<br> 
+<br>
 
 
 ------------
