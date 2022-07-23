@@ -6,6 +6,19 @@ Replication code + data for:
 
 > Searing, E. A., & Lecy, J. D. (2022). Growing Up Nonprofit: Predictors of Early-Stage Nonprofit Formalization.*Nonprofit and Voluntary Sector Quarterly*, 51(3), 680-698. [**PDF**](https://github.com/lecy/np-professionalization/raw/main/searing-lecy-growing-up-nonprofit.pdf)
 
+The nonprofit organizational life cycle literature has traditionally focused on the
+entry and exit processes; the intermediate organizational life stages between these
+bookends have received less attention. Almost half of all nonprofits at any given time
+operate in an early life stage with less than US$100,000 in revenue, minimal overhead
+spending, and no paid managers. This study examines the process by which nonprofits
+leave the small, informal, startup phase and begin the next life stage characterized
+by growth and formalization. We identify financial and organizational characteristics
+that predict whether the nonprofit will successfully transition out of the early and
+informal life stage. We find that investments in professional fundraising and access
+to government funds are predictive of the transition out of the start-up phase, while
+traditional financial predictors such as revenue concentration, equity ratio, fixed cost
+ratios, and the accumulation of unrestricted assets have modest to no effects.
+
 -----
 
 <br>
