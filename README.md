@@ -38,20 +38,40 @@ ratios, and the accumulation of unrestricted assets have modest to no effects.
 
 
 
+
+
+<br>
+<br>
+
+-----------
+
+<br>
+
+<h3>
+  <img height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/> 
+  <a href="https://github.com/lecy/np-professionalization"><b>FILES</b></a> • 
+  <a href="https://github.com/lecy/np-professionalization/tree/main/Data"><b>DATA</b></a>  
+</h3>
+<blockquote>REPLICATION CODE + DATA</blockquote>
+    
 <div class="row">
   
-  <div class="column" style="text-align: center">
+  <div class="column">
     
-    <br>
-    <br>
-    <br>
-    <h3>
-      <img height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/> 
-      <a href="https://github.com/lecy/np-professionalization"><b>FILES</b></a> • 
-      <a href="https://github.com/lecy/np-professionalization/tree/main/Data"><b>DATA</b></a>  
-    </h3>
-    <blockquote>REPLICATION CODE + DATA FOR:</blockquote>
-    
+    <ul style="list-style-type:circle">
+      <li><a href="https://lecy.github.io/np-formalization/step-01-create-discrete-hazard-dataset.html">Step-01 Hazard Model Panel Construction</a></li>
+      <ul>
+        <li><a href="https://lecy.github.io/np-formalization/step-01.01-descriptive-statistics.html">Descriptives</a></li>
+        <li><a href="https://lecy.github.io/np-formalization/step-01.02-spells.html">Harzard Spells</a></li>
+      </ul>
+      <li><a href="https://lecy.github.io/np-formalization/step-02-specify-models.html">Step-02 Model Specification</a></li>
+      <li><a href="https://lecy.github.io/np-formalization/step-03-calculate-effects.html">Step-03 Generate Effect Sizes</a></li>
+      <li><a href="https://lecy.github.io/np-formalization/step-04-create-graphs-for-paper.html">Step-04 Formatted Paper Graphs</a></li>
+      <ul>
+        <li><a href="https://github.com/lecy/np-professionalization/tree/main/Results">Formatted Tables</a></li>
+      </ul>
+    </ul> 
+
   </div>
   
   <div class="column">
@@ -62,22 +82,6 @@ ratios, and the accumulation of unrestricted assets have modest to no effects.
   
 </div>
 
-<br>
-<br>
-
------------
-
-<br>
-
-### Replication Steps:
-
-* [Step-01 Hazard Model Panel Construction](https://lecy.github.io/np-formalization/step-01-create-discrete-hazard-dataset.html)
-  - [Descriptives](https://lecy.github.io/np-formalization/step-01.01-descriptive-statistics.html)
-  - [Harzard Spells](https://lecy.github.io/np-formalization/step-01.02-spells.html)
-* [Step-02 Model Specification](https://lecy.github.io/np-formalization/step-02-specify-models.html)
-* [Step-03 Generate Effect Sizes](https://lecy.github.io/np-formalization/step-03-calculate-effects.html)
-* [Step-04 Formatted Paper Graphs](https://lecy.github.io/np-formalization/step-04-create-graphs-for-paper.html)
-  - [Formatted Tables](https://github.com/lecy/np-professionalization/tree/main/Results)  
 
 <br> 
 <br>
