@@ -4,7 +4,7 @@ Replication code + data for:
 
 -----
 
-> Searing, E. A., & Lecy, J. D. (2022). Growing Up Nonprofit: Predictors of Early-Stage Nonprofit Formalization.*Nonprofit and Voluntary Sector Quarterly*, 51(3), 680-698. [**PDF**](https://github.com/lecy/np-professionalization/raw/main/searing-lecy-growing-up-nonprofit.pdf)
+> [Searing, E. A.](https://scholar.google.com/citations?user=AO5J8IMAAAAJ&hl=en), & [Lecy, J. D.](https://scholar.google.com/citations?user=Ir8H4wMAAAAJ&hl=en) (2022). Growing Up Nonprofit: Predictors of Early-Stage Nonprofit Formalization.*Nonprofit and Voluntary Sector Quarterly*, 51(3), 680-698. [**PDF**](https://github.com/lecy/np-professionalization/raw/main/searing-lecy-growing-up-nonprofit.pdf)
 
 The nonprofit organizational life cycle literature has traditionally focused on the
 entry and exit processes; the intermediate organizational life stages between these
@@ -50,6 +50,6 @@ Replication Files:
 ------------
 
 ![image](https://user-images.githubusercontent.com/1209099/180621196-b118db3f-ba0b-4753-87f1-987d9a13a116.png)
-)
+
 
 
