@@ -19,9 +19,9 @@ Replication code + data for:
 -----------
 
 
-All files available on [GITHUB](https://github.com/lecy/np-professionalization)
+All files available on <img height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/> [GITHUB](https://github.com/lecy/np-professionalization)
 
-[DATA](https://github.com/lecy/np-professionalization/tree/main/Data) 
+:floppy_disk: [DATA](https://github.com/lecy/np-professionalization/tree/main/Data) :floppy_disk: 
 
 Replication Files:  
 
