@@ -3,6 +3,9 @@
 <br>
 <br>
 
+
+<img height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/> [FILES](https://github.com/lecy/np-professionalization) • [DATA](https://github.com/lecy/np-professionalization/tree/main/Data) 
+
 > REPLICATION CODE + DATA FOR:
 
 <br> 
@@ -47,9 +50,7 @@ ratios, and the accumulation of unrestricted assets have modest to no effects.
 
 <br>
 
-<img height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/> [FILES](https://github.com/lecy/np-professionalization) • [DATA](https://github.com/lecy/np-professionalization/tree/main/Data) 
-
-**Replication Steps:**  
+### Replication Steps:
 
 * [Step-01 Hazard Model Panel Construction](https://lecy.github.io/np-formalization/step-01-create-discrete-hazard-dataset.html)
   - [Descriptives](https://lecy.github.io/np-formalization/step-01.01-descriptive-statistics.html)
