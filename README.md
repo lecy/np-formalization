@@ -8,8 +8,11 @@ Replication code + data for:
 
 -----
 
+<br>
 
-![](https://raw.githubusercontent.com/lecy/np-professionalization/main/Results/effect-sizes.png =250x)
+<img src="[http://....jpg](https://raw.githubusercontent.com/lecy/np-professionalization/main/Results/effect-sizes.png)" width="250" />
+
+<br>
 
 -----------
 
