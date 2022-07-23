@@ -1,12 +1,11 @@
-# Growing Up Nonprofit: Predictors of Early-Stage Nonprofit Formalization
 
-Replication code + data for:
+> Replication code + data for:
 
 -----
 
-> [Searing, E. A.](https://scholar.google.com/citations?user=AO5J8IMAAAAJ&hl=en), & [Lecy, J. D.](https://scholar.google.com/citations?user=Ir8H4wMAAAAJ&hl=en) (2022). Growing Up Nonprofit: Predictors of Early-Stage Nonprofit Formalization.*Nonprofit and Voluntary Sector Quarterly*, 51(3), 680-698. [**PDF**](https://github.com/lecy/np-professionalization/raw/main/searing-lecy-growing-up-nonprofit.pdf)
+## Searing, E. A., & Lecy, J. D. (2022). Growing Up Nonprofit: Predictors of Early-Stage Nonprofit Formalization.*Nonprofit and Voluntary Sector Quarterly*, 51(3), 680-698. [**PDF**](https://github.com/lecy/np-professionalization/raw/main/searing-lecy-growing-up-nonprofit.pdf)
 
-<i class="ai ai-google-scholar-square ai-3x"></i>
+<i class="ai ai-google-scholar-square ai-3x"></i> [Elizabeth Searing](https://scholar.google.com/citations?user=AO5J8IMAAAAJ&hl=en)  <i class="ai ai-google-scholar-square ai-3x"></i>  [Jesse Lecy](https://scholar.google.com/citations?user=Ir8H4wMAAAAJ&hl=en)  
 
 The nonprofit organizational life cycle literature has traditionally focused on the
 entry and exit processes; the intermediate organizational life stages between these
@@ -34,11 +33,9 @@ ratios, and the accumulation of unrestricted assets have modest to no effects.
 -----------
 
 
-All files available on <img height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/> [GITHUB](https://github.com/lecy/np-professionalization)
+<img height=50 src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"/> [FILES](https://github.com/lecy/np-professionalization) • [DATA](https://github.com/lecy/np-professionalization/tree/main/Data) 
 
-:floppy_disk: [DATA](https://github.com/lecy/np-professionalization/tree/main/Data) :floppy_disk: 
-
-Replication Files:  
+Replication Steps:  
 
 * [Step-01 Hazard Model Panel Construction](https://lecy.github.io/np-formalization/step-01-create-discrete-hazard-dataset.html)
   - [Descriptives](https://lecy.github.io/np-formalization/step-01.01-descriptive-statistics.html)
