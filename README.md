@@ -14,15 +14,6 @@
 -----
 
 ## Searing, E. A., & Lecy, J. D. (2022). Growing Up Nonprofit: Predictors of Early-Stage Nonprofit Formalization.*Nonprofit and Voluntary Sector Quarterly*, 51(3), 680-698. 
-<div style="text-align: right"> 
-<h3>    
-  <a href="https://doi.org/10.1177/08997640211014280"><b>NVSQ</b></a> •
-  <a href="https://github.com/lecy/np-professionalization/raw/main/searing-lecy-growing-up-nonprofit.pdf"><b>PDF</b></a> •
-  <a href="https://scholar.google.com/citations?user=AO5J8IMAAAAJ&hl=en"><i class="ai ai-google-scholar-square ai-1x"></i></a> Elizabeth Searing  •   
-  <a href="https://scholar.google.com/citations?user=Ir8H4wMAAAAJ&hl=en"><i class="ai ai-google-scholar-square ai-1x"></i></a> Jesse Lecy  
-</h3>
-</div>
-
 
 The nonprofit organizational life cycle literature has traditionally focused on the
 entry and exit processes; the intermediate organizational life stages between these
@@ -37,17 +28,22 @@ to government funds are predictive of the transition out of the start-up phase, 
 traditional financial predictors such as revenue concentration, equity ratio, fixed cost
 ratios, and the accumulation of unrestricted assets have modest to no effects.
 
+<div style="text-align: right"> 
+<h3>    
+  <a href="https://doi.org/10.1177/08997640211014280"><b>NVSQ</b></a> •
+  <a href="https://github.com/lecy/np-professionalization/raw/main/searing-lecy-growing-up-nonprofit.pdf"><b>PDF</b></a> •
+  <a href="https://scholar.google.com/citations?user=AO5J8IMAAAAJ&hl=en"><i class="ai ai-google-scholar-square ai-1x"></i></a> Elizabeth Searing  •   
+  <a href="https://scholar.google.com/citations?user=Ir8H4wMAAAAJ&hl=en"><i class="ai ai-google-scholar-square ai-1x"></i></a> Jesse Lecy  
+</h3>
+</div>
+
+<br>
+
 <p align="center">
 <img src="https://raw.githubusercontent.com/lecy/np-professionalization/main/Results/effect-sizes.png" width="500" />
 </p>
 
 <br>
-
-
-
-
-
-
 <br>
 
 -----------
