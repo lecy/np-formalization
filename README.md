@@ -75,6 +75,9 @@ ratios, and the accumulation of unrestricted assets have modest to no effects.
         <li><a href="https://github.com/lecy/np-professionalization/tree/main/Results">Formatted Tables</a></li>
       </ul>
     </ul> 
+    
+    <br>
+    <a class="button" href="https://github.com/lecy/np-formalization/issues/new/choose">Discuss</a>
 
   </div>
   
@@ -86,8 +89,6 @@ ratios, and the accumulation of unrestricted assets have modest to no effects.
   
 </div>
 
-
-<a class="button" href="https://github.com/lecy/np-formalization/issues/new/choose">Discuss</a>
 
 <br> 
 <br>
