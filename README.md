@@ -31,8 +31,7 @@ Replication Files:
 * [Step-02 Model Specification](https://lecy.github.io/np-formalization/step-02-specify-models.html)
 * [Step-03 Generate Effect Sizes](https://lecy.github.io/np-formalization/step-03-calculate-effects.html)
 * [Step-04 Formatted Paper Graphs](https://lecy.github.io/np-formalization/step-04-create-graphs-for-paper.html)
-
-[Formatted Tables](https://github.com/lecy/np-professionalization/tree/main/Results)
+  - [Formatted Tables](https://github.com/lecy/np-professionalization/tree/main/Results)  
 
 
 ------------
