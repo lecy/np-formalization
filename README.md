@@ -14,10 +14,10 @@
 -----
 
 ## Searing, E. A., & Lecy, J. D. (2022). Growing Up Nonprofit: Predictors of Early-Stage Nonprofit Formalization.*Nonprofit and Voluntary Sector Quarterly*, 51(3), 680-698. 
-## [**NVSQ**](https://doi.org/10.1177/08997640211014280) •  [**PDF**](https://github.com/lecy/np-professionalization/raw/main/searing-lecy-growing-up-nonprofit.pdf)
-
 <div style="text-align: right"> 
 <h3>    
+  <a href="https://doi.org/10.1177/08997640211014280"><b>NVSQ</b></a> •
+  <a href="https://github.com/lecy/np-professionalization/raw/main/searing-lecy-growing-up-nonprofit.pdf"><b>PDF</b></a> •
   <a href="https://scholar.google.com/citations?user=AO5J8IMAAAAJ&hl=en"><i class="ai ai-google-scholar-square ai-1x"></i></a> Elizabeth Searing  •   
   <a href="https://scholar.google.com/citations?user=Ir8H4wMAAAAJ&hl=en"><i class="ai ai-google-scholar-square ai-1x"></i></a> Jesse Lecy  
 </h3>
