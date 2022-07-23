@@ -87,10 +87,9 @@ ratios, and the accumulation of unrestricted assets have modest to no effects.
 </div>
 
 
-<br> 
-
 <a class="button" href="https://github.com/lecy/np-formalization/issues/new/choose">Discuss</a>
 
+<br> 
 <br>
 
 
